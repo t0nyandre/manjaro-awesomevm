@@ -5,10 +5,10 @@ on:
   schedule:
     - cron:  '01 0 1 * *'
   # remove if you don't want to build when commits are pushed to you main/master branch
-  push:
-    branches:
-      - master
-      - main
+  #push:
+  #  branches:
+  #   - master
+  #   - main
 
 jobs:
   prepare-release:
@@ -33,7 +33,7 @@ jobs:
         ##### EDIT ME #####      
         EDITION: [awesome]
         BRANCH: [stable]
-        SCOPE: [minimal,full]
+        SCOPE: [minimal]
         ###################
     steps:
       # cancel already running instances of the same action on the currently working on branch
@@ -41,14 +41,14 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - id: image-build
-        uses: manjaro/manjaro-iso-action@main
+        uses: manjaro/manjaro-iso-action@v2.8
         with:
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          version: "21.0"
-          kernel: linux510
-          code-name: "Ornara"
+          version: "22.0"
+          kernel: linux61
+          code-name: "Sikaris"
           # providing a release-tag allows for github releases
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
