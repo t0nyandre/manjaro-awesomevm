@@ -33,7 +33,7 @@ jobs:
         ##### EDIT ME #####      
         EDITION: [awesome]
         BRANCH: [stable]
-        SCOPE: [minimal]
+        SCOPE: [minimal, full]
         ###################
     steps:
       # cancel already running instances of the same action on the currently working on branch
@@ -41,7 +41,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
       - id: image-build
-        uses: manjaro/manjaro-iso-action@v2.8
+        uses: manjaro/manjaro-iso-action@main
         with:
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
