@@ -52,7 +52,7 @@ jobs:
           scope: ${{ matrix.scope }}
           version: ${{ steps.time.outputs.time }}
           kernel: linux61
-          code-name: "CustomAwesome"
+          code-name: "Sikaris"
           # providing a release-tag allows for github releases
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
