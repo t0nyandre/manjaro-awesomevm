@@ -73,6 +73,7 @@ jobs:
         ##### EDIT ME #####      
         EDITION: [awesome]
         BRANCH: [stable]
+        SCOPE: [full]
         ###################
     steps:
       # cancel already running instances of the same action on the currently working on branch
