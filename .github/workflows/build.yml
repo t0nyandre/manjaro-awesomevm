@@ -27,28 +27,32 @@ jobs:
       release_tag: ${{ steps.time.outputs.time }}      
   release:
     runs-on: ubuntu-20.04
-    needs: prepare-release    
+    needs: [prepare-release]    
     strategy:
       matrix:
         ##### EDIT ME #####      
         EDITION: [awesome]
         BRANCH: [stable]
-        SCOPE: [minimal, full]
+        SCOPE: [minimal,full]
         ###################
     steps:
       # cancel already running instances of the same action on the currently working on branch
       - uses: styfle/cancel-workflow-action@0.9.0
         with:
           access_token: ${{ github.token }}
+      - id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          format: 'YY.MM'
       - id: image-build
-        uses: manjaro/manjaro-iso-action@v2.8
+        uses: manjaro/manjaro-iso-action@main
         with:
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          version: "22.0"
+          version: ${{ steps.time.outputs.time }}
           kernel: linux61
-          code-name: "Sikaris"
+          code-name: "CustomAwesome"
           # providing a release-tag allows for github releases
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       # delete the github release in case of cancellation or failure
